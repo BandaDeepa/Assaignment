@@ -1,0 +1,147 @@
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  .bg-container{
+    display: flex;
+    flex-direction: column;
+    background-color: #f7e6fa;
+    height: 100%;
+    background-size: cover;
+  }
+
+  .main-heading {
+    color: #1a315c;
+    font-family: "Roboto";
+    font-size: 30px;
+    font-weight: bold;
+    padding: 20px;
+    text-align: center;
+  }
+    .tabs {
+    display: flex;
+    justify-content: space-around;
+    background-color: #34ddcf;
+    padding: 10px;
+  }
+
+  .tab {
+    cursor: pointer;
+    color: #7a0528;
+    font-family: "sans-serif";
+    font-size: 22px;
+    font-weight: 600;
+  }
+
+  .products {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 20px;
+  }
+
+  .product-card {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100px;
+    margin: 10px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+    position: relative;
+  }
+
+  .product-image {
+    max-width: 100%;
+    height: auto;
+  }
+  .textCard{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 5px;
+    margin-right: 5px;
+  }
+
+  .title{
+    color: #7a0528;
+    font-size: 20px;
+    font-family: "sans-serif";
+    font-weight: 600;
+  }
+
+  .vendor {
+    color: #032e3b;
+    font-size: 15px;
+    font-family: "Arial";
+    font-weight: 500;
+  }
+
+  .priceDetailsCard{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 10px;
+    margin-right: 5px;
+    margin-bottom: 15px;
+  }
+  .price {
+    color: #ee1124;
+    font-size: 15px;
+    font-family: "Georgia";
+    font-weight: 500;
+  }
+  .compare-price{
+    color: #470fe2;
+    font-size: 15px;
+    font-family: "Georgia";
+    font-weight: 500;
+  }
+  .discount{
+    color: #8d0486;
+    font-size: 15px;
+    font-family: "Georgia";
+    font-weight: 500;
+  }
+
+  .add-to-cart-btn {
+    background-color: #28a745;
+    color: #fff;
+    padding: 8px 15px;
+    border: none;
+    cursor: pointer;
+  }
+  
+.badge-label {
+    background-color: #ec2f2f;
+    color: #fff;
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 2px;
+    padding: 7px 15px;
+    display: inline-block;
+    position: absolute;
+    top: 28px;
+    left: 20px;
+}
+
+  @media (max-width: 767px) {
+    .product-card {
+      width: 80%;
+    }
+  }
+
+  @media (min-width: 768px) and (max-width: 1024px) {
+    .product-card {
+      width: 48%;
+    }
+  }
+
+  @media (min-width: 1025px) {
+    .product-card {
+      width: 30%;
+    }
+  }

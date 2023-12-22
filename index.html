@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Marmeto E-Kart</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="bg-container">
+        <h1 class="main-heading">MarmetoKart</h1>
+  <div class="tabs">
+    <div class="tab" onclick="showProducts('men')">Men</div>
+    <div class="tab" onclick="showProducts('women')">Women</div>
+    <div class="tab" onclick="showProducts('kids')">Kids</div>
+  </div>
+
+  <div class="products" id="men-products" ></div>
+  <div class="products" id="women-products" style="display: none;" ></div>
+  <div class="products" id="kids-products" style="display: none;"></div>
+</div>
+
+<script>
+    function showProducts(category) {
+        document.getElementById('men-products').style.display = 'none';
+        document.getElementById('women-products').style.display = 'none';
+        document.getElementById('kids-products').style.display = 'none';
+
+        document.getElementById(`${category}-products`).style.display = 'flex';
+    }
+
+
+    async function fetchData(url) {
+        try {
+            const response = await fetch(url);
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    }
+    async function init() {
+        try {
+            const data = await fetchData('https://cdn.shopify.com/s/files/1/0564/3685/0790/files/multiProduct.json');
+
+            data.categories.forEach(category => {
+                renderProducts(category.category_products, `${category.category_name.toLowerCase()}-products`);
+            });
+        } catch (error) {
+            console.error('Error initializing:', error);
+        }
+    }
+    init();
+
+        function renderProducts(products, containerId) {
+        const container = document.getElementById(containerId);
+        container.innerHTML = '';
+
+        products.forEach(product => {
+            const card = document.createElement('div');
+            card.classList.add('product-card');
+
+            const imageCard = document.createElement("div")
+            card.appendChild(imageCard)
+
+            if (product.badge_text) {
+                const label = document.createElement('div');
+                label.classList.add('badge-label');
+                label.innerText = product.badge_text;
+                imageCard.appendChild(label);
+            }
+
+            const image = document.createElement('img');
+            image.src = product.image;
+            image.alt = product.title;
+            image.classList.add('product-image');
+
+            const textCard= document.createElement("div")
+            textCard.classList.add('textCard')
+            card.appendChild(textCard)
+
+            const badge = document.createElement('div');
+            badge.classList.add('badge');
+
+            const title = document.createElement('div');
+            title.innerText = product.title;
+            title.classList.add('title')          
+
+            const vendor = document.createElement('div');
+            vendor.innerText = `Vendor: ${product.vendor}`;
+            vendor.classList.add('vendor') 
+
+            const priceDetailsCard = document.createElement('div')
+            priceDetailsCard.classList.add('priceDetailsCard')
+            card.appendChild(priceDetailsCard)
+
+            const price = document.createElement('div');
+            price.innerText = `Price: $${product.price}`;
+            price.classList.add("price")
+
+            const comparePrice = document.createElement('div');
+            comparePrice.innerText = `Compare at: $${product.compare_at_price}`;
+            comparePrice.classList.add("compare-price")
+
+            const discount = document.createElement('div');
+            const discountValue = Math.round(((product.compare_at_price - product.price) / product.compare_at_price) * 100);
+            discount.innerText = `Discount: ${discountValue}% Off`;
+            discount.classList.add("discount")
+
+            const addToCartBtn = document.createElement('button');
+            addToCartBtn.classList.add('add-to-cart-btn');
+            addToCartBtn.innerText = 'Add to Cart';
+
+            imageCard.appendChild(image);
+            textCard.appendChild(title)
+            textCard.appendChild(vendor);
+            priceDetailsCard.appendChild(price);
+            priceDetailsCard.appendChild(comparePrice);
+            priceDetailsCard.appendChild(discount);
+            card.appendChild(addToCartBtn);
+
+            container.appendChild(card);
+        });
+    }
+</script>
+</body>
+</html>
